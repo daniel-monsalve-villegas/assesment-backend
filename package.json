@@ -4,7 +4,8 @@
   "description": "favs api backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "node ./dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,12 @@
   },
   "homepage": "https://github.com/daniel-monsalve-villegas/assesment-backend#readme",
   "devDependencies": {
+    "ts-node-dev": "^2.0.0",
     "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.9.0"
   }
 }
