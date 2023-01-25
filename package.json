@@ -1,0 +1,28 @@
+{
+  "name": "assesment-backend",
+  "version": "1.0.0",
+  "description": "favs api backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniel-monsalve-villegas/assesment-backend.git"
+  },
+  "keywords": [
+    "backend",
+    "favs",
+    "api",
+    "express",
+    "node",
+    "mongoose",
+    "testing"
+  ],
+  "author": "daniel-monsalve-villegas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daniel-monsalve-villegas/assesment-backend/issues"
+  },
+  "homepage": "https://github.com/daniel-monsalve-villegas/assesment-backend#readme"
+}
