@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/daniel-monsalve-villegas/assesment-backend/issues"
   },
-  "homepage": "https://github.com/daniel-monsalve-villegas/assesment-backend#readme"
+  "homepage": "https://github.com/daniel-monsalve-villegas/assesment-backend#readme",
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
 }
