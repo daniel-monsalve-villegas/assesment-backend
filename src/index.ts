@@ -1,30 +1,16 @@
 import express from 'express';
 import connectDb from './config/database';
-import { getAllUsers, getUserById } from './user/user.controller';
+import routes from './routes';
 
+// initialize express
 const app = express();
 
+// connect to database through mongoose
 connectDb();
+// use routes function to simplify call to direction
+routes(app);
 
-app.get('/api/users', async (req, res) => {
-  try {
-    const users = await getAllUsers();
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
-
-app.get('/api/users/:id', async (req, res) => {
-  const { id } = req.params;
-  try {
-    const users = await getUserById(id);
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
-
+// check if express is running
 app.listen(8080, () => {
   console.log('Server is running in port 8080');
 });
