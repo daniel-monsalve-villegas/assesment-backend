@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 async function connectDb() {
   const uri =
-    'mongodb+srv://dev_dr:4atqTTK4VvV9PgCe@favsapi.cvzavvm.mongodb.net/?retryWrites=true&w=majority';
+    'mongodb+srv://dev_dr:4atqTTK4VvV9PgCe@favsapi.cvzavvm.mongodb.net/backendAssesment?retryWrites=true&w=majority';
 
   try {
     await mongoose.connect(uri);

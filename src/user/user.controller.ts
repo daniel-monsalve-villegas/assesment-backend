@@ -9,3 +9,13 @@ export async function getAllUsers() {
     return null;
   }
 }
+
+export async function getUserById(id) {
+  try {
+    const user = await User.findById(id);
+    return user;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
