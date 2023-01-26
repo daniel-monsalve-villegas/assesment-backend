@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 
 async function connectDb() {
-  const uri =
-    'mongodb+srv://dev_dr:4atqTTK4VvV9PgCe@favsapi.cvzavvm.mongodb.net/backendAssesment?retryWrites=true&w=majority';
+  const uri = process.env.MONGO_DB_URI;
 
   try {
     await mongoose.connect(uri);
