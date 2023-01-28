@@ -28,6 +28,10 @@
   },
   "homepage": "https://github.com/daniel-monsalve-villegas/assesment-backend#readme",
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.16",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^18.11.18",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.9.4"
   },
