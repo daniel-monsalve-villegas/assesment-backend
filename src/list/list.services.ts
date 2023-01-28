@@ -1,40 +1,31 @@
-import { Schema, model, Document } from 'mongoose';
+import List from './list.model';
 
-export interface FavsDocument extends Document {
-  title: string;
-  description: string;
-  link?: string;
-  name: string;
-  createdBy: Schema.Types.ObjectId;
+export function getAllLists() {
+  return List.find({}).populate({
+    path: 'createdBy',
+    select: 'firstName lastName',
+  });
 }
 
-const FavsSchema = new Schema({
-  title: {
-    type: String,
-    required: [true, 'Please provide a title'],
-  },
-  description: {
-    type: String,
-    required: [true, 'Please provide a description'],
-  },
-  link: String,
-  name: {
-    type: String,
-    required: [true, 'Please provide a name'],
-  },
-  createdBy: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
-});
+export function getList(id) {
+  return List.findById(id).populate({
+    path: 'createdBy',
+    select: 'firstName lastName',
+  });
+}
 
-FavsSchema.virtual('list').get(function list() {
-  const { title, description, name, createdBy } = this;
+export function getListByField(field, value) {
+  return List.find({ [field]: value });
+}
 
-  return { title, description, name, createdBy };
-});
+export function createList(list) {
+  return List.create(list);
+}
 
-const List = model<FavsDocument>('List', FavsSchema);
+export function updateList(id, list) {
+  return List.findByIdAndUpdate(id, list, { new: true });
+}
 
-export default List;
+export function deleteList(id) {
+  return List.findByIdAndDelete(id);
+}

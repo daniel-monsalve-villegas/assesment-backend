@@ -1,7 +1,8 @@
 import { Schema, model, Document } from 'mongoose';
 
 type userProfileType = {
-  user: string;
+  firstName: string;
+  lastName: string;
   email: string;
 };
 
