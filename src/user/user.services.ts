@@ -1,19 +1,30 @@
-import User from './user.model';
+import { FilterQuery } from 'mongoose';
+import User, { UserDocument } from './user.model';
 
-export async function getAllUsers() {
-  return User.find();
+export function getAllUsers() {
+  return User.find({}, { password: 0 });
 }
 
-export async function getUserById(id) {
-  const user = await User.findById(id);
+export function getUserById(id) {
+  const user = User.findById(id);
   return user;
 }
 
-export async function createUser(user) {
+export function getUserList(filter: FilterQuery<UserDocument>) {
+  const user = User.findOne(filter);
+  return user;
+}
+
+export function createUser(user) {
   return User.create(user);
 }
 
-export async function updateUser(id, user) {
+export function updateUser(id, user) {
   const updatedUser = User.findByIdAndUpdate(id, user, { new: true });
   return updatedUser;
+}
+
+export function deleteUser(id) {
+  const deletedUser = User.findByIdAndDelete(id);
+  return deletedUser;
 }

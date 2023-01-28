@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 import express from 'express';
 import connectDb from './config/database';
 import routes from './routes';
+import configExpress from './config/express';
 
 // load environment variables
 dotenv.config();
@@ -9,14 +10,19 @@ dotenv.config();
 // initialize express
 const app = express();
 
-app.use(express.json);
+// Check if there an environment variable with the port of use one by default
+const port = process.env.PORT || 8080;
 
-// connect to database through mongoose
+// Setup express
+configExpress(app);
+
+// Connect to MongoDB
 connectDb();
-// use routes function to simplify call to direction
+
+// Use routes function to simplify call to direction
 routes(app);
 
-// check if express is running
-app.listen(8080, () => {
-  console.log('Server is running in port 8080');
+// Check if express is running
+app.listen(port, () => {
+  console.log(`Server is running in port ${port}`);
 });
