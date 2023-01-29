@@ -1,4 +1,12 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
+
+export interface ListDocument extends Document {
+  title: string;
+  description: string;
+  link?: string;
+  name: string;
+  createdBy: string;
+}
 
 const FavsSchema = new Schema(
   {

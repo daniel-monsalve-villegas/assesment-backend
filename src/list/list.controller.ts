@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import {
   getAllLists,
   getList,
@@ -6,12 +7,12 @@ import {
   deleteList,
 } from './list.services';
 
-export async function handleGetAllLists(req, res) {
+export async function handleGetAllLists(req: Request, res: Response) {
   const lists = await getAllLists();
 
   return res.status(200).json(lists);
 }
-export async function handleGetList(req, res) {
+export async function handleGetList(req: Request, res: Response) {
   const { id } = req.params;
 
   const list = await getList(id);
@@ -23,7 +24,7 @@ export async function handleGetList(req, res) {
   return res.status(200).json(list);
 }
 
-export async function handleCreateList(req, res) {
+export async function handleCreateList(req: Request, res: Response) {
   const data = req.body;
 
   try {
@@ -34,7 +35,7 @@ export async function handleCreateList(req, res) {
   }
 }
 
-export async function handleUpdateList(req, res) {
+export async function handleUpdateList(req: Request, res: Response) {
   const { id } = req.params;
   const { title, description, link, name } = req.body;
 
@@ -47,7 +48,7 @@ export async function handleUpdateList(req, res) {
   return res.status(200).json(list);
 }
 
-export async function handleDeleteList(req, res) {
+export async function handleDeleteList(req: Request, res: Response) {
   const { id } = req.params;
 
   const list = await deleteList(id);

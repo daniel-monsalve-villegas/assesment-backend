@@ -1,7 +1,7 @@
-import express from 'express';
+import express, { Application } from 'express';
 import morgan from 'morgan';
 
-function configExpress(app) {
+function configExpress(app: Application): void {
   // Config to get data to req.body
   app.use(express.json());
 
