@@ -1,61 +1,98 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import { verifyToken } from '../auth/local.services';
+import { AuthRequest } from '../auth/local.types';
 import {
   getAllLists,
   getList,
   createList,
-  updateList,
   deleteList,
+  /* updateList, */
+  /* deleteList, */
 } from './list.services';
 
 export async function handleGetAllLists(req: Request, res: Response) {
-  const lists = await getAllLists();
-
-  return res.status(200).json(lists);
+  try {
+    const lists = await getAllLists();
+    return res.status(200).json(lists);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(error);
+  }
 }
+
 export async function handleGetList(req: Request, res: Response) {
   const { id } = req.params;
 
-  const list = await getList(id);
+  try {
+    const list = await getList(id);
 
-  if (!list) {
-    return res.status(404).json({ message: 'List not found' });
+    if (!list) {
+      return res.status(404).json({ message: 'List not found' });
+    }
+
+    return res.status(200).json(list);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json(error);
   }
-
-  return res.status(200).json(list);
 }
 
-export async function handleCreateList(req: Request, res: Response) {
+export async function handleCreateList(req: AuthRequest, res: Response) {
   const data = req.body;
+  const user = req.user;
 
   try {
-    const list = await createList(data);
+    const list = await createList({ ...data, userId: user?._id });
+    console.log(list);
+
     return res.status(201).json(list);
   } catch (error) {
     return res.status(500).json(error);
   }
 }
 
-export async function handleUpdateList(req: Request, res: Response) {
+/* export async function handleUpdateList(req: AuthRequest, res: Response) { */
+/*   const { id } = req.params; */
+/*   const user = req.user; */
+/**/
+/*   const query = { _id: id, userId: user?._id }; */
+/**/
+/*   const update = { */
+/*   link: req.body.link, */
+/*   title: req.body.title, */
+/*   description: req.body.description, */
+/*   List: { $push: req.body} */
+/**/
+/*   const list = await Lists.findOneAndUpdate(query, update, { new: true}); */
+/**/
+/*   if (!list) { */
+/*     return res.status(404).json({ message: 'List not found' }); */
+/*   } */
+/**/
+/*   return res.status(200).json(list); */
+/* } */
+
+/*     return res.status(500).json(error) */
+/*   } */
+
+export async function handleDeleteList(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   const { id } = req.params;
-  const { title, description, link, name } = req.body;
 
-  const list = await updateList(id, { title, description, link, name });
+  console.log('comprueba');
 
-  if (!list) {
-    return res.status(404).json({ message: 'List not found' });
+  try {
+    const list = await deleteList(id);
+
+    if (!list) {
+      return res.status(400).json({ message: 'List not found' });
+    }
+    return res.status(200).json({ message: 'List deleted' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json(error);
   }
-
-  return res.status(200).json(list);
-}
-
-export async function handleDeleteList(req: Request, res: Response) {
-  const { id } = req.params;
-
-  const list = await deleteList(id);
-
-  if (!list) {
-    return res.status(404).json({ message: 'List not found' });
-  }
-
-  return res.status(200).json(list);
 }

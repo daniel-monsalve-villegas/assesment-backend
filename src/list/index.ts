@@ -1,11 +1,12 @@
 import { Router } from 'express';
+import { isAuthenticated } from '../auth/local.services';
 
 import {
   handleGetAllLists,
   handleCreateList,
   handleDeleteList,
   handleGetList,
-  handleUpdateList,
+  /* handleUpdateList, */
 } from './list.controller';
 
 const router = Router();
@@ -22,9 +23,9 @@ router.get('/:id', handleGetList);
 router.post('/', handleCreateList);
 
 // PATCH /api/list/:id
-router.patch('/:id', handleUpdateList);
+/* router.patch('/:id', handleUpdateList); */
 
 // DELETE /api/list/:id
-router.delete('/:id', handleDeleteList);
+router.delete('/:id', isAuthenticated, handleDeleteList);
 
 export default router;

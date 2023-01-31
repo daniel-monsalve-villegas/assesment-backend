@@ -17,7 +17,7 @@ export interface UserDocument extends Document {
   updatedAt: Date;
 
   profile: userProfileType;
-  comparePassword: (password: string) => Promise<boolean>
+  comparePassword: (password: string) => Promise<boolean>;
 }
 
 const UserSchema = new Schema(
@@ -73,22 +73,39 @@ UserSchema.virtual('profile').get(function profile() {
   return { firstName, lastName, email };
 });
 
-UserSchema.methods.comparePassword = async function comparePassword(
+async function comparePassword(
   this: UserDocument,
   candidatePassword: string,
   next: Function
-): Promise<boolean> {
+) {
   const user = this;
-
   try {
     const isMatch = await bcrypt.compare(candidatePassword, user.password);
-
     return isMatch;
   } catch (error: any) {
     next(error);
     return false;
   }
-};
+}
+
+UserSchema.methods.comparePassword = comparePassword;
+
+/* UserSchema.methods.comparePassword = async function comparePassword( */
+/*   this: UserDocument, */
+/*   candidatePassword: string, */
+/*   next: Function */
+/* ): Promise<boolean> { */
+/*   const user = this; */
+/**/
+/*   try { */
+/*     const isMatch = await bcrypt.compare(candidatePassword, user.password); */
+/**/
+/*     return isMatch; */
+/*   } catch (error: any) { */
+/*     next(error); */
+/*     return false; */
+/*   } */
+/* }; */
 
 const User = model<UserDocument>('User', UserSchema);
 

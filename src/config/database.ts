@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+import mongoose, { mongo, Mongoose } from 'mongoose';
+mongoose.set('strictQuery', true);
 
 async function connectDb() {
   const uri = process.env.MONGO_DB_URI;

@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import {
   createUser,
   deleteUser,
@@ -72,27 +73,5 @@ export async function handleDeleteUser(req: Request, res: Response) {
   } catch (error: any) {
     console.error(error);
     return res.status(500).json(error);
-  }
-}
-
-export async function handleLoginUser(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
-  const { email, password } = req.body;
-
-  try {
-    const user = await getUser({ email });
-
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    const validatePassword = await user.comparePassword(password);
-    return res
-      .status(200)
-      .json({ message: 'User logged in', validatePassword });
-  } catch (error: any) {
-    return res.status(500).json(error.message);
   }
 }

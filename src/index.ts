@@ -1,11 +1,12 @@
 import * as dotenv from 'dotenv';
+
+// load environment variables
+dotenv.config();
+
 import express from 'express';
 import connectDb from './config/database';
 import routes from './routes';
 import configExpress from './config/express';
-
-// load environment variables
-dotenv.config();
 
 // initialize express
 const app = express();
