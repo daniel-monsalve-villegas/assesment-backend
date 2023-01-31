@@ -52,11 +52,7 @@ Response:
 - &hl=en -> query: tell the server the host language is english
 - #dayone -> fragment: select the day one
 
-<<<<<<< HEAD
 2. About API's and status codes
-=======
-2. About API's and status code
->>>>>>> main
 
 - Web API -> Application programming interface for either a web server or a web browser. It's usually limited to a web application's client-side and thus usually does not include web server or browser implementation details unless publicly accessible by a remote web application.
 - RESTful API -> Interface that two computational systems use to exchange information in a secure way throuhgt the internet. The RESTful Api admit this exchange of information because use secure software communication standards.
