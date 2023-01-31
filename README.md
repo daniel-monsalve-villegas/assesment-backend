@@ -38,7 +38,7 @@ Response:
 
 ### Questions
 
-1.
+1. Explain URL
 
 - https:// -> scheme: this tell the web server which protocol to use to accesses the page
 - backend -> subdomain: indicate which particular page of the website we are going to access
@@ -52,7 +52,7 @@ Response:
 - &hl=en -> query: tell the server the host language is english
 - #dayone -> fragment: select the day one
 
-2.
+2. About API's and status code
 
 - Web API -> Application programming interface for either a web server or a web browser. It's usually limited to a web application's client-side and thus usually does not include web server or browser implementation details unless publicly accessible by a remote web application.
 - RESTful API -> Interface that two computational systems use to exchange information in a secure way throuhgt the internet. The RESTful Api admit this exchange of information because use secure software communication standards.
@@ -60,4 +60,6 @@ Response:
 - Status code 400 -> The request can't be process or it's not going to process it because it's perceived as and client error. It's translate to _Bad Request_
 - Status code 500 -> The request find an unexpected condition that doesn't allow to complete the request. It's translate to _Internal Server Error_
 
-3. CRUD refears to the basical fetch petitions to an API service, it means Create, Read, Update and Delete.
+3. CRUD
+
+refears to the basical fetch petitions to an API service, it means Create, Read, Update and Delete.
