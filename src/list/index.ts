@@ -6,7 +6,7 @@ import {
   handleCreateList,
   handleDeleteList,
   handleGetList,
-  /* handleUpdateList, */
+  handleUpdateList,
 } from './list.controller';
 
 const router = Router();
@@ -14,16 +14,16 @@ const router = Router();
 // RESTful API
 
 // GET /api/list
-router.get('/', handleGetAllLists);
+router.get('/', isAuthenticated, handleGetAllLists);
 
 // GET /api/list/:id
-router.get('/:id', handleGetList);
+router.get('/:id', isAuthenticated, handleGetList);
 
 // POST /api/list
-router.post('/', handleCreateList);
+router.post('/', isAuthenticated, handleCreateList);
 
 // PATCH /api/list/:id
-/* router.patch('/:id', handleUpdateList); */
+router.patch('/:id', isAuthenticated, handleUpdateList);
 
 // DELETE /api/list/:id
 router.delete('/:id', isAuthenticated, handleDeleteList);

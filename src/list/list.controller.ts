@@ -6,8 +6,7 @@ import {
   getList,
   createList,
   deleteList,
-  /* updateList, */
-  /* deleteList, */
+  updateList,
 } from './list.services';
 
 export async function handleGetAllLists(req: Request, res: Response) {
@@ -51,29 +50,21 @@ export async function handleCreateList(req: AuthRequest, res: Response) {
   }
 }
 
-/* export async function handleUpdateList(req: AuthRequest, res: Response) { */
-/*   const { id } = req.params; */
-/*   const user = req.user; */
-/**/
-/*   const query = { _id: id, userId: user?._id }; */
-/**/
-/*   const update = { */
-/*   link: req.body.link, */
-/*   title: req.body.title, */
-/*   description: req.body.description, */
-/*   List: { $push: req.body} */
-/**/
-/*   const list = await Lists.findOneAndUpdate(query, update, { new: true}); */
-/**/
-/*   if (!list) { */
-/*     return res.status(404).json({ message: 'List not found' }); */
-/*   } */
-/**/
-/*   return res.status(200).json(list); */
-/* } */
+export async function handleUpdateList(req: AuthRequest, res: Response) {
+  const { id } = req.params;
+  const data = req.body;
 
-/*     return res.status(500).json(error) */
-/*   } */
+  try {
+    const list = await updateList(id, data);
+
+    if (!list) {
+      return res.status(404).json({ message: 'List not found' });
+    }
+    return res.status(200).json(list);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+}
 
 export async function handleDeleteList(
   req: Request,
